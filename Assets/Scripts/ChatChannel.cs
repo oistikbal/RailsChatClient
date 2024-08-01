@@ -1,3 +1,5 @@
+using UnityEditor;
+using UnityEditor.VersionControl;
 using UnityEngine;
 
 public class ChatChannel : MonoBehaviour
@@ -15,4 +17,24 @@ public class ChatChannel : MonoBehaviour
     {
         _railsSocket.Dispose();
     }
+
+#if UNITY_EDITOR
+    public void SendEditorMessage(string message)
+    {
+        if (EditorApplication.isPlaying)
+        {
+            _railsSocket.Send(new MessageCommand(_railsSocket, message));
+        }
+    }
+
+    public void Reconnect()
+    {
+        if (EditorApplication.isPlaying)
+        {
+            _railsSocket.Dispose();
+            _railsSocket = new RailsSocket(_address, "Chat", false);
+        }
+    }
+#endif
+
 }
