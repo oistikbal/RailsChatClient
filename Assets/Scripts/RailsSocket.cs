@@ -1,4 +1,5 @@
 using System;
+using Unity.VisualScripting.Antlr3.Runtime;
 using UnityEngine;
 using WebSocketSharp;
 
@@ -7,12 +8,14 @@ public class RailsSocket : IDisposable
     private WebSocket _ws;
     public string ChannelName { get; private set; }
 
-    public RailsSocket(string address, string channelName, bool emitOnPing = false)
+    public RailsSocket(string address, string channelName, string token,bool emitOnPing = false)
     {
         _ws = new WebSocket(address);
         ChannelName = channelName;
         _ws.EnableRedirection = true;
         _ws.EmitOnPing = emitOnPing;
+
+        _ws.SetCookie(new WebSocketSharp.Net.Cookie("token", token));
 
         _ws.OnOpen += (sender, e) =>
         {

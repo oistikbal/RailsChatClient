@@ -352,7 +352,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: afd44308f77fdb64b8a0a2ebf6ed16a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _address: ws://localhost:3000/cable
+  _webSocketUrl: ws://localhost:3000/cable
+  _loginUrl: http://localhost:3000/api/v1/users/sign_in
+  _email: b@b.com
+  _password: bbbbbb
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
