@@ -13,8 +13,13 @@ public class Channel
     }
 }
 
+public abstract class Command
+{
+
+}
+
 [Serializable]
-public class SubscribeCommand
+public class SubscribeCommand : Command
 {
     [SerializeField]
     private string command;
@@ -23,6 +28,20 @@ public class SubscribeCommand
     public SubscribeCommand(string channel)
     {
         command = "subscribe";
+        identifier = JsonUtility.ToJson(new Channel(channel + "Channel"));
+    }
+}
+
+[Serializable]
+public class MessageCommand : Command
+{
+    [SerializeField]
+    private string command;
+    public string identifier;
+
+    public MessageCommand(string channel)
+    {
+        command = "message";
         identifier = JsonUtility.ToJson(new Channel(channel + "Channel"));
     }
 }

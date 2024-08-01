@@ -349,9 +349,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 979520552}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f7338edfd6d8d6a47bd10adf0174f6aa, type: 3}
+  m_Script: {fileID: 11500000, guid: afd44308f77fdb64b8a0a2ebf6ed16a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _address: ws://localhost:3000/cable
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

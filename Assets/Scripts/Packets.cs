@@ -1,5 +1,4 @@
 using System;
-using UnityEngine;
 
 [Serializable]
 public abstract class BasePackage
@@ -8,7 +7,7 @@ public abstract class BasePackage
 }
 
 [Serializable]
-public class ConfirmSubcriptionPackage: BasePackage
+public class ConfirmSubcriptionPackage : BasePackage
 {
     public string message;
 }
