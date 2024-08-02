@@ -1,0 +1,16 @@
+{
+    "name": "RailsChatClientEditor",
+    "rootNamespace": "",
+    "references": [
+        "GUID:b49adc4b8cf870a4aa8018ca2a513741"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

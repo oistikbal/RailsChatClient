@@ -1,0 +1,37 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 18a32318dec4495cb166bf98e60f7c0d, type: 3}
+  m_Name: _TextureGroup_Icons_Soundy
+  m_EditorClassIdentifier: 
+  GroupCategory: Soundy
+  GroupName: Icons
+  RemovePrefixFromTextureName: 
+  IgnoreTextureSettings: 0
+  Textures:
+  - TextureName: AudioEngine
+    TextureReference: {fileID: 2800000, guid: 13f512f420f0c564b9b1521fefbd9b1c, type: 3}
+  - TextureName: AudioPlayer
+    TextureReference: {fileID: 2800000, guid: fdcf41b7dcd0bd94489e424abb8d8717, type: 3}
+  - TextureName: Music
+    TextureReference: {fileID: 2800000, guid: 3736f57e3c8408047a7ac33c641e372b, type: 3}
+  - TextureName: MusicLibrary
+    TextureReference: {fileID: 2800000, guid: 98ee76c7f6531104a8ad003575bb207c, type: 3}
+  - TextureName: MusicNode
+    TextureReference: {fileID: 2800000, guid: c6b623815eb2da9449bfec23bd11a43a, type: 3}
+  - TextureName: Sound
+    TextureReference: {fileID: 2800000, guid: 87a4f19155339184cb3361face8c96ef, type: 3}
+  - TextureName: SoundLibrary
+    TextureReference: {fileID: 2800000, guid: f887ebc2bdab8224e9c40c9473d7fe59, type: 3}
+  - TextureName: SoundNode
+    TextureReference: {fileID: 2800000, guid: 95355735887ad544885a1b2a3a4c4bc6, type: 3}
+  - TextureName: Soundy
+    TextureReference: {fileID: 2800000, guid: 48dc9aa9ae4eefa4bb91b858bd6597a7, type: 3}
