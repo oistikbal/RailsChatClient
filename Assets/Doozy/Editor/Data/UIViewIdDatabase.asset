@@ -17,4 +17,6 @@ MonoBehaviour:
     - Category: None
       Name: None
     - Category: UI
+      Name: Chat
+    - Category: UI
       Name: Login

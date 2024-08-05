@@ -10,23 +10,21 @@
 
 using System.Collections.Generic;
 // ReSharper disable All
-namespace Doozy.Runtime.UIManager.Containers
+namespace Doozy.Runtime.UIManager.Components
 {
-    public partial class UIView
+    public partial class UIButton
     {
-        public static IEnumerable<UIView> GetViews(UIViewId.UI id) => GetViews(nameof(UIViewId.UI), id.ToString());
-        public static void Show(UIViewId.UI id, bool instant = false) => Show(nameof(UIViewId.UI), id.ToString(), instant);
-        public static void Hide(UIViewId.UI id, bool instant = false) => Hide(nameof(UIViewId.UI), id.ToString(), instant);
+        public static IEnumerable<UIButton> GetButtons(UIButtonId.UI id) => GetButtons(nameof(UIButtonId.UI), id.ToString());
+        public static bool SelectButton(UIButtonId.UI id) => SelectButton(nameof(UIButtonId.UI), id.ToString());
     }
 }
 
 namespace Doozy.Runtime.UIManager
 {
-    public partial class UIViewId
+    public partial class UIButtonId
     {
         public enum UI
         {
-            Chat,
             Login
         }    
     }
