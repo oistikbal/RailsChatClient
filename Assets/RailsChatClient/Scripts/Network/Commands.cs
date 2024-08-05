@@ -2,22 +2,11 @@ using System;
 using UnityEngine;
 
 [Serializable]
-public class Channel
-{
-    public string channel;
-
-    public Channel(string channel)
-    {
-        this.channel = channel;
-    }
-}
-
-[Serializable]
-public class Data
+public class StringData
 {
     public string data;
 
-    public Data(string data)
+    public StringData(string data)
     {
         this.data = data;
     }
@@ -41,7 +30,7 @@ public abstract class Command
 [Serializable]
 public class SubscribeCommand : Command
 {
-    public SubscribeCommand(RailsSocket socket) : base("subscribe", JsonUtility.ToJson(new Channel(socket.ChannelName + "Channel")))
+    public SubscribeCommand(ChannelSO channel) : base("subscribe", JsonUtility.ToJson(new StringData(channel.ChannelName + "Channel")))
     {
     }
 }
@@ -49,7 +38,7 @@ public class SubscribeCommand : Command
 [Serializable]
 public abstract class AbstractMessageCommand : Command
 {
-    public AbstractMessageCommand(string channelName) : base("message", JsonUtility.ToJson(new Channel(channelName + "Channel")))
+    public AbstractMessageCommand(string channelName) : base("message", JsonUtility.ToJson(new StringData(channelName + "Channel")))
     {
     }
 }
@@ -58,8 +47,8 @@ public abstract class AbstractMessageCommand : Command
 [Serializable]
 public class MessageCommand : AbstractMessageCommand
 {
-    public MessageCommand(RailsSocket socket, string message) : base(socket.ChannelName)
+    public MessageCommand(ChannelSO channel, string message) : base(channel.ChannelName)
     {
-        data = JsonUtility.ToJson(new Data(message));
+        data = JsonUtility.ToJson(new StringData(message));
     }
 }

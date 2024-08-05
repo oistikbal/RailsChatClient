@@ -1,40 +1,40 @@
 using System;
+using System.Net.Http;
+using System.Security.Policy;
+using System.Text;
+using System.Threading.Tasks;
 using UnityEngine;
 using WebSocketSharp;
 
 public class RailsSocket : IDisposable
 {
     private WebSocket _ws;
-    public string ChannelName { get; private set; }
 
-    public RailsSocket(string address, string channelName, string token,bool emitOnPing = false)
+    public RailsSocket(string url, string token)
     {
-        _ws = new WebSocket(address);
-        ChannelName = channelName;
+        _ws = new WebSocket(url);
         _ws.EnableRedirection = true;
-        _ws.EmitOnPing = emitOnPing;
 
         _ws.SetCookie(new WebSocketSharp.Net.Cookie("token", token));
 
         _ws.OnOpen += (sender, e) =>
         {
-            var subscription = new SubscribeCommand(this);
-            _ws.Send(JsonUtility.ToJson(subscription));
+            Debug.Log($"[{e}");
         };
 
         _ws.OnMessage += (sender, e) =>
         {
-            Debug.Log($"[{channelName}Channel]: {e.Data}");
+            Debug.Log($"[{e.Data}");
         };
 
         _ws.OnError += (sender, e) =>
         {
-            Debug.Log($"[{channelName}Channel]: {e.Message}");
+            Debug.Log($"[{e.Message}");
         };
 
         _ws.OnClose += (sender, e) =>
         {
-            Debug.Log($"[{channelName}Channel]: Closed, Reason: {e.Reason}");
+            Debug.Log($"[Closed, Reason: {e.Reason}");
         };
 
         _ws.ConnectAsync();
@@ -50,7 +50,9 @@ public class RailsSocket : IDisposable
         _ws.Send(JsonUtility.ToJson(command));
     }
 
-    public void Receive(string message)
+    public void SubscribeChannel(ChannelSO channelSO)
     {
+        var subscription = new SubscribeCommand(channelSO);
+        _ws.Send(JsonUtility.ToJson(subscription));
     }
 }
