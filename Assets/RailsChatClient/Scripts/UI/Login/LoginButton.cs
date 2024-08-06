@@ -1,25 +1,38 @@
-using System.Collections;
-using System.Collections.Generic;
 using Doozy.Runtime.Signals;
 using TMPro;
 using UnityEngine;
 
-public class LoginButton : MonoBehaviour
+namespace RailsChat
 {
-    [SerializeField]
-    private TextMeshProUGUI _email;
-    [SerializeField]
-    private TextMeshProUGUI _password;
-
-    private SignalStream _loginSuccesfullStream;
-
-    private void Awake()
+    public struct LoginData
     {
-        _loginSuccesfullStream = SignalsService.GetStream(StreamId.UI.LoginSuccesfull);
+        public string Email;
+        public string Password;
+
+        public LoginData(string email, string password)
+        {
+            Email = email;
+            Password = password;
+        }
     }
 
-    public void OnLoginButtonClicked()
+    public class LoginButton : MonoBehaviour
     {
-        _loginSuccesfullStream.SendSignal();
+        [SerializeField]
+        private TMP_InputField _email;
+        [SerializeField]
+        private TMP_InputField _password;
+
+        private SignalStream _loginButtonClicked;
+
+        private void Awake()
+        {
+            _loginButtonClicked = SignalsService.GetStream(StreamId.UI.LoginButtonClicked);
+        }
+
+        public void OnLoginButtonClicked()
+        {
+            _loginButtonClicked.SendSignal<LoginData>(new LoginData(_email.text, _password.text));
+        }
     }
 }

@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f19ee05fa93d72439a3baf6fd90567f, type: 3}
   m_Name: Chat
   m_EditorClassIdentifier: 
-  Name: Chat
+  ChannelName: Chat

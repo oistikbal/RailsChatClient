@@ -1,26 +1,57 @@
 using System;
+using UnityEngine;
 
-[Serializable]
-public class User
-{
-    public string email;
-    public string password;
-
-    public User(string email, string password)
+namespace RailsChat 
+{ 
+    [Serializable]
+    public class User
     {
-        this.email = email;
-        this.password = password;
+        public string email;
+        public string password;
+
+        public User(string email, string password)
+        {
+            this.email = email;
+            this.password = password;
+        }
     }
-}
 
-[Serializable]
-public abstract class BasePacket
-{
-    public string Type { get; set; }
-}
+    [Serializable]
+    public class UserLogin
+    {
+        [SerializeField]
+        private User user_login;
 
-[Serializable]
-public class ConfirmSubcriptionPacket : BasePacket
-{
-    public string message;
+        public UserLogin(User user)
+        {
+            user_login = user;
+        }
+    }
+
+    [Serializable]
+    public abstract class Packet
+    {
+    }
+
+    [Serializable]
+    public class ConfirmSubcriptionPacket : Packet
+    {
+        private string message;
+
+        public string Message { get { return message; } }
+    }
+
+    [Serializable]
+    public class AuthenticationTokenPacket : Packet
+    {
+        [SerializeField]
+        private string authentication_token;
+
+        public string AuthenticationToken { get { return authentication_token; } }
+
+        public AuthenticationTokenPacket(string authenticationToken)
+        {
+            authentication_token = authenticationToken;
+        }
+    }
 }
