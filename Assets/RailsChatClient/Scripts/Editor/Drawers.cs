@@ -11,18 +11,26 @@ namespace RailsChat
         {
             var channelSO = property.objectReferenceValue as ChannelSO;
 
-            EditorGUI.BeginProperty(position, label, property);
-
-            float singleLineHeight = EditorGUIUtility.singleLineHeight;
-            Rect fieldRect = new Rect(position.x, position.y, position.width, singleLineHeight);
-
             if (channelSO != null)
             {
-                GUI.enabled = true;
-                channelSO.ChannelName = EditorGUI.TextField(fieldRect, "Name: ",channelSO.ChannelName);
-                fieldRect.y += singleLineHeight;
+                // Object field
+                EditorGUILayout.BeginHorizontal();
+                EditorGUILayout.LabelField("Object");
+                EditorGUILayout.ObjectField(property, typeof(ChannelSO), GUIContent.none);
+                EditorGUILayout.EndHorizontal();
+
+                // Name field
+                EditorGUILayout.BeginHorizontal();
+                EditorGUILayout.LabelField("Name:");
+                channelSO.ChannelName = EditorGUILayout.TextField(channelSO.ChannelName);
+                EditorGUILayout.EndHorizontal();
+
+                // Status field
                 GUI.enabled = false;
-                EditorGUI.EnumPopup(fieldRect, "Status: ", channelSO.Status);
+                EditorGUILayout.BeginHorizontal();
+                EditorGUILayout.LabelField("Status:");
+                EditorGUILayout.EnumPopup(channelSO.Status);
+                EditorGUILayout.EndHorizontal();
                 GUI.enabled = true;
             }
             else
@@ -31,15 +39,12 @@ namespace RailsChat
                 EditorGUILayout.LabelField(property.displayName);
                 EditorGUILayout.ObjectField(property, typeof(ChannelSO), GUIContent.none);
                 GUILayout.EndHorizontal();
-
             }
-
-            EditorGUI.EndProperty();
         }
 
         public override float GetPropertyHeight(SerializedProperty property, GUIContent label)
         {
-            return property.objectReferenceValue == null ? EditorGUIUtility.singleLineHeight * 2 : EditorGUIUtility.singleLineHeight * 2;
+            return property.objectReferenceValue == null ? EditorGUIUtility.singleLineHeight * 0 : EditorGUIUtility.singleLineHeight * 0;
         }
     }
 
