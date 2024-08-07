@@ -302,8 +302,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _webSocketUrl: ws://localhost:3000/cable
   _loginUrl: http://localhost:3000/api/v1/users/sign_in
-  _channels:
-  - {fileID: 11400000, guid: 3b2bc60a2fa04264b9ce3a48b9459d8c, type: 2}
+  _channelTypes:
+  - GuidAssignmentFailed: 0
+    GUID: 48159afb3d3936c4aa192a1a8e9a8169
+    _typeNameAndAssembly: RailsChat.ChatChannel, RailsChatClient
+    _suppressLogs: 0
 --- !u!1 &192249540
 GameObject:
   m_ObjectHideFlags: 0

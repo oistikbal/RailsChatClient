@@ -43,7 +43,7 @@ namespace RailsChat
     [Serializable]
     public class SubscribeCommand : Command
     {
-        public SubscribeCommand(ChannelSO channel) : base("subscribe", JsonUtility.ToJson(new Channel(channel.ChannelName + "Channel")))
+        public SubscribeCommand(AbstractChannel channel) : base("subscribe", JsonUtility.ToJson(new Channel(channel.ToString() + "Channel")))
         {
         }
     }
@@ -61,7 +61,7 @@ namespace RailsChat
     [Serializable]
     public class MessageCommand : AbstractMessageCommand
     {
-        public MessageCommand(ChannelSO channel, string message) : base(channel.ChannelName)
+        public MessageCommand(AbstractChannel channel, string message) : base(channel.ToString())
         {
             data = JsonUtility.ToJson(new Data(message));
         }

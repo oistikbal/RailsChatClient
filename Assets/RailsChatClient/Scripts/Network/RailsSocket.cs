@@ -10,11 +10,16 @@ namespace RailsChat
     {
         private WebSocket _ws;
 
-        private Dictionary<string, ChannelSO> _channels;
+        private Dictionary<Type, AbstractChannel> _channels;
+        public Dictionary<string, Type> _channelsMap;
+
+        public Dictionary<Type, AbstractChannel> Channels { get { return _channels; } }
+
 
         public RailsSocket(string url, string token)
         {
-            _channels = new Dictionary<string, ChannelSO>();
+            _channels = new Dictionary<Type, AbstractChannel>();
+            _channelsMap = new Dictionary<string, Type>();
             _ws = new WebSocket(url);
 
             _ws.EnableRedirection = true;
@@ -33,7 +38,7 @@ namespace RailsChat
 
             _ws.OnError += (sender, e) =>
             {
-                Debug.Log($"[{e.Message}");
+                Debug.LogError($"[{e.Message}");
             };
 
             _ws.OnClose += (sender, e) =>
@@ -68,15 +73,16 @@ namespace RailsChat
             _ws.Send(JsonUtility.ToJson(command));
         }
 
-        public void SubscribeChannel(ChannelSO channelSO)
+        public void SubscribeChannel(Type channelType)
         {
-            if (_channels.ContainsKey(channelSO.name))
+            if (_channels.ContainsKey(channelType))
             {
-                Debug.LogError($"Channel {channelSO.name} already exists!");
+                Debug.LogError($"Channel {channelType.Name} already exists!");
                 return;
             }
-            channelSO.Subscribe(this);
-            _channels.Add(channelSO.ChannelName, channelSO);
+            var channel = Activator.CreateInstance(channelType, this);
+            _channels.Add(channelType, (AbstractChannel)channel);
+            _channelsMap.Add(channelType.Name, channelType);
         }
 
         void HandleWebSocketMessage(string json)
@@ -107,23 +113,24 @@ namespace RailsChat
             }
         }
 
-        void HandleConfirmSubscriptionPacket(ConfirmSubscriptionPacket packet)
+        private void HandleConfirmSubscriptionPacket(ConfirmSubscriptionPacket packet)
         {
             Debug.Log($"ConfirmSubscriptionPacket received. Channel: {packet.Channel}");
-            _channels[packet.Channel].PacketReceived(packet);
+            var type = _channelsMap[$"{packet.Channel}Channel"];
+            _channels[type].PacketReceived(packet);
         }
 
-        void HandleAuthenticationTokenPacket(AuthenticationTokenPacket packet)
+        private void HandleAuthenticationTokenPacket(AuthenticationTokenPacket packet)
         {
             Debug.Log($"AuthenticationTokenPacket received. Token: {packet.AuthenticationToken}");
         }
 
-        void HandleWelcomePacket(WelcomePacket packet)
+        private void HandleWelcomePacket(WelcomePacket packet)
         {
-            Debug.Log($"WelcomePacket received. Token: {packet.Message}");
+            Debug.Log($"WelcomePacket received. Message: {packet.Message}");
         }
 
-        void HandlePingPacket(PingPacket packet)
+        private void HandlePingPacket(PingPacket packet)
         {
             Debug.Log($"PingPacket received. Message: {packet.Message}");
         }

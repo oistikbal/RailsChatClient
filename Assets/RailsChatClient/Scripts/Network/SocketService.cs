@@ -1,8 +1,10 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
+using TypeReferences;
 using UnityEngine;
 using WebSocketSharp;
 
@@ -40,12 +42,30 @@ namespace RailsChat
         private string _webSocketUrl = "ws://localhost:3000/cable";
         [SerializeField]
         private string _loginUrl = "http://localhost:3000/api/v1/users/sign_in";
+
+        [Inherits(typeof(AbstractChannel))]
         [SerializeField]
-        private List<ChannelSO> _channels;
-
-
+        private List<TypeReference> _channelTypes;
+        
         private HttpClient _httpClient;
+        [SerializeField]
         private RailsSocket _railsSocket;
+
+        public List<AbstractChannel> Channels 
+        { 
+            get 
+            { 
+                if(_railsSocket != null)
+                {
+                    return _railsSocket.Channels.Values.ToList<AbstractChannel>();
+                }
+                else
+                {
+                    return new List<AbstractChannel>();
+                }
+
+            } 
+        }
 
         private void Awake()
         {
@@ -72,9 +92,9 @@ namespace RailsChat
                 return false;
 
 
-            foreach (var channel in _channels)
+            foreach (var channelType in _channelTypes)
             {
-                _railsSocket.SubscribeChannel(channel);
+                _railsSocket.SubscribeChannel(channelType);
             }
 
             return true;
