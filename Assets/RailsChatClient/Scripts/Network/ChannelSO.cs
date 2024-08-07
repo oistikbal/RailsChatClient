@@ -1,7 +1,7 @@
 using UnityEngine;
 
-namespace RailsChat 
-{ 
+namespace RailsChat
+{
     [CreateAssetMenu(fileName = "NewChannel", menuName = "ScriptableObjects/Channel", order = 1)]
     public class ChannelSO : ScriptableObject
     {
@@ -19,12 +19,17 @@ namespace RailsChat
 
         public ChannelStatus Status { get { return _status; } }
 
-        public void PacketReceived(Packet packet) { }
+        public void PacketReceived(Packet packet)
+        {
+            if (packet is ConfirmSubscriptionPacket)
+            {
+                _status = ChannelStatus.Open;
+            }
+        }
 
         public void Subscribe(RailsSocket socket)
         {
             socket.Send(new SubscribeCommand(this));
-            _status = ChannelStatus.Open;
         }
 
         private void OnEnable()

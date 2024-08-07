@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Text;
@@ -9,10 +10,36 @@ namespace RailsChat
 {
     public class SocketService : MonoSingleton<SocketService>
     {
+        [Serializable]
+        private class User
+        {
+            public string email;
+            public string password;
+
+            public User(string email, string password)
+            {
+                this.email = email;
+                this.password = password;
+            }
+        }
+
+        [Serializable]
+        private class UserLogin
+        {
+            [SerializeField]
+            private User user_login;
+
+            public UserLogin(User user)
+            {
+                user_login = user;
+            }
+        }
+
+
         [SerializeField]
         private string _webSocketUrl = "ws://localhost:3000/cable";
         [SerializeField]
-        private string _loginUrl = "http://localhost:3000/api/users/sign_in";
+        private string _loginUrl = "http://localhost:3000/api/v1/users/sign_in";
         [SerializeField]
         private List<ChannelSO> _channels;
 
@@ -23,6 +50,12 @@ namespace RailsChat
         private void Awake()
         {
             _httpClient = new HttpClient();
+        }
+
+        private void OnDestroy()
+        {
+            if (_railsSocket != null)
+                _railsSocket.Dispose();
         }
 
         public async Task<bool> LogIn(string email, string password)
@@ -49,6 +82,7 @@ namespace RailsChat
 
         private async Task<string> Authenticate(string email, string password)
         {
+
             var user = new User(email, password);
             var content = new StringContent(JsonUtility.ToJson(new UserLogin(new User(email, password))), Encoding.UTF8, "application/json");
             var response = await _httpClient.PostAsync(_loginUrl, content);

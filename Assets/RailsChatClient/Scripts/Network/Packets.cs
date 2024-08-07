@@ -1,44 +1,43 @@
 using System;
 using UnityEngine;
 
-namespace RailsChat 
-{ 
+namespace RailsChat
+{
     [Serializable]
-    public class User
+    public abstract class Packet : ISerializationCallbackReceiver
     {
-        public string email;
-        public string password;
-
-        public User(string email, string password)
+        public virtual void OnAfterDeserialize()
         {
-            this.email = email;
-            this.password = password;
+        }
+
+        public virtual void OnBeforeSerialize()
+        {
         }
     }
 
     [Serializable]
-    public class UserLogin
+    public class ConfirmSubscriptionPacket : Packet
     {
+        private class ChannelData
+        {
+            public string channel;
+        }
+
         [SerializeField]
-        private User user_login;
+        private string identifier;
+        [SerializeField]
+        private string type = "confirm_subscription";
 
-        public UserLogin(User user)
+        private string channel;
+        public string Channel { get { return channel; } }
+        public string Type { get { return type; } }
+
+        public override void OnAfterDeserialize()
         {
-            user_login = user;
+            base.OnAfterDeserialize();
+            var channelData = JsonUtility.FromJson<ChannelData>(identifier);
+            channel = channelData.channel.Replace("Channel", string.Empty);
         }
-    }
-
-    [Serializable]
-    public abstract class Packet
-    {
-    }
-
-    [Serializable]
-    public class ConfirmSubcriptionPacket : Packet
-    {
-        private string message;
-
-        public string Message { get { return message; } }
     }
 
     [Serializable]
@@ -48,10 +47,25 @@ namespace RailsChat
         private string authentication_token;
 
         public string AuthenticationToken { get { return authentication_token; } }
+    }
 
-        public AuthenticationTokenPacket(string authenticationToken)
-        {
-            authentication_token = authenticationToken;
-        }
+    [Serializable]
+    public class PingPacket : Packet
+    {
+        [SerializeField]
+        private string type;
+        [SerializeField]
+        private string message;
+
+        public string Message { get { return message; } }
+    }
+
+    [SerializeField]
+    public class WelcomePacket : Packet
+    {
+        [SerializeField]
+        private string type;
+
+        public string Message { get { return type; } }
     }
 }

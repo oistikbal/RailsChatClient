@@ -1,33 +1,34 @@
 using System;
 using UnityEngine;
 
-namespace RailsChat 
-{ 
-    [Serializable]
-    public class Channel
-    {
-        public string channel;
-
-        public Channel(string channel)
-        {
-            this.channel = channel;
-        }
-    }
-
-    [Serializable]
-    public class Data
-    {
-        public string data;
-
-        public Data(string data)
-        {
-            this.data = data;
-        }
-    }
-
+namespace RailsChat
+{
     [Serializable]
     public abstract class Command
     {
+        [Serializable]
+        protected class Channel
+        {
+            public string channel;
+
+            public Channel(string channel)
+            {
+                this.channel = channel;
+            }
+        }
+
+        [Serializable]
+        protected class Data
+        {
+            public string data;
+
+            public Data(string data)
+            {
+                this.data = data;
+            }
+        }
+
+
         [SerializeField]
         private string command;
         public string identifier;
