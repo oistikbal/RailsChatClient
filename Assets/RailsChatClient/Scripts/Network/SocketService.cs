@@ -107,7 +107,6 @@ namespace RailsChat
             {
                 responseString = await response.Content.ReadAsStringAsync();
                 responseObject = JsonUtility.FromJson<AuthenticationTokenPacket>(responseString);
-                Debug.Log(responseString);
             }
             catch
             {

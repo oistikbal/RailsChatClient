@@ -19,11 +19,10 @@ namespace RailsChat
         public RailsSocket(string url, string token, List<TypeReference> typeReferences)
         {
             _channels = new Dictionary<string, AbstractChannel>();
-            _ws = new WebSocket(url);
+            _ws = new WebSocket($"{url}?token={token}");
 
             _ws.EnableRedirection = true;
 
-            _ws.SetCookie(new WebSocketSharp.Net.Cookie("token", token));
 
             _ws.OnOpen += (sender, e) =>
             {
