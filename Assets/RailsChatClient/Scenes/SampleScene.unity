@@ -3330,6 +3330,7 @@ GameObject:
   - component: {fileID: 1316529562}
   - component: {fileID: 1316529565}
   - component: {fileID: 1316529564}
+  - component: {fileID: 1316529567}
   m_Layer: 5
   m_Name: SendButton
   m_TagString: Untagged
@@ -3474,7 +3475,19 @@ MonoBehaviour:
     Runners: []
     Event:
       m_PersistentCalls:
-        m_Calls: []
+        m_Calls:
+        - m_Target: {fileID: 1316529567}
+          m_TargetAssemblyTypeName: RailsChat.SendButton, RailsChatClient
+          m_MethodName: OnSendButtonClicked
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
   ButtonId:
     Category: UI
     Name: Send
@@ -4857,6 +4870,19 @@ CanvasGroup:
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
+--- !u!114 &1316529567
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1316529560}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6b1b95878a9f7ae4fa4cd08479f792b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _text: {fileID: 930009493}
 --- !u!1 &1326688561
 GameObject:
   m_ObjectHideFlags: 0
@@ -5203,6 +5229,7 @@ GameObject:
   - component: {fileID: 1494226115}
   - component: {fileID: 1494226114}
   - component: {fileID: 1494226113}
+  - component: {fileID: 1494226118}
   m_Layer: 5
   m_Name: ChatView
   m_TagString: Untagged
@@ -5898,6 +5925,18 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
+--- !u!114 &1494226118
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1494226110}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fcf5dd1f25ae8f54893c06a03f3d6845, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1634055592
 GameObject:
   m_ObjectHideFlags: 0

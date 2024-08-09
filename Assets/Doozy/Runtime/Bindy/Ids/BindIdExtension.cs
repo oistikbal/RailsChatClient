@@ -10,23 +10,19 @@
 
 using System.Collections.Generic;
 // ReSharper disable All
-namespace Doozy.Runtime.UIManager.Components
+
+namespace Doozy.Runtime.Bindy
 {
-    public partial class UIButton
+    public partial class Bind
     {
-        public static IEnumerable<UIButton> GetButtons(UIButtonId.UI id) => GetButtons(nameof(UIButtonId.UI), id.ToString());
-        public static bool SelectButton(UIButtonId.UI id) => SelectButton(nameof(UIButtonId.UI), id.ToString());
+//ACCESSOR//
     }
 }
 
-namespace Doozy.Runtime.UIManager
+namespace Doozy.Runtime.Bindy
 {
-    public partial class UIButtonId
+    public partial class BindId
     {
-        public enum UI
-        {
-            Login,
-            Send
-        }    
+//DATA//    
     }
 }

@@ -12,7 +12,7 @@ namespace RailsChat
 
         private void Awake()
         {
-            SignalsService.GetStream(StreamId.UI.LoginButtonClicked).OnSignal += OnLoginButtonClicked;
+            SignalsService.GetStream(StreamId.UI.LoginButton).OnSignal += OnLoginButtonClicked;
             _loginSuccesfull = SignalsService.GetStream(StreamId.UI.LoginSuccesfull);
         }
 

@@ -17,4 +17,10 @@ MonoBehaviour:
     - Category: None
       Name: None
     - Category: UI
+      Name: ChannelSubscribed
+    - Category: UI
+      Name: LoginButton
+    - Category: UI
       Name: LoginSuccesfull
+    - Category: UI
+      Name: SendButton

@@ -5,7 +5,6 @@ using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using TypeReferences;
-using UnityEditor;
 using UnityEngine;
 using WebSocketSharp;
 
@@ -47,16 +46,16 @@ namespace RailsChat
         [Inherits(typeof(AbstractChannel))]
         [SerializeField]
         private List<TypeReference> _channelTypes;
-        
+
         private HttpClient _httpClient;
         [SerializeField]
         private RailsSocket _railsSocket;
 
-        public List<AbstractChannel> Channels 
-        { 
-            get 
-            { 
-                if(_railsSocket != null)
+        public List<AbstractChannel> Channels
+        {
+            get
+            {
+                if (_railsSocket != null)
                 {
                     return _railsSocket.Channels.Values.ToList<AbstractChannel>();
                 }
@@ -65,7 +64,7 @@ namespace RailsChat
                     return new List<AbstractChannel>();
                 }
 
-            } 
+            }
         }
 
         private void Awake()
@@ -121,6 +120,13 @@ namespace RailsChat
             }
 
             return responseObject.AuthenticationToken;
+        }
+
+        public T GetChannel<T>() where T : AbstractChannel
+        {
+            if (_railsSocket != null)
+                return _railsSocket.GetChannel<T>();
+            else return null;
         }
     }
 }

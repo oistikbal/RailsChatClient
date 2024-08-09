@@ -85,6 +85,13 @@ namespace RailsChat
             _channelsMap.Add(channelType.Name, channelType);
         }
 
+        public T GetChannel<T>() where T : AbstractChannel
+        {
+            if (_channels.TryGetValue(typeof(T), out var channel))
+                return (T)channel;
+            else return null;
+        }
+
         void HandleWebSocketMessage(string json)
         {
             if (json.Contains("\"type\":\"ping\""))

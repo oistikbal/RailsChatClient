@@ -39,8 +39,10 @@ namespace Doozy.Runtime.Signals
     {
         public enum UI
         {
-            LoginButtonClicked,
-            LoginSuccesfull
+            ChannelSubscribed,
+            LoginButton,
+            LoginSuccesfull,
+            SendButton
         }         
     }
 }

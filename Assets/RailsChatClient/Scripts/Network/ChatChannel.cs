@@ -1,8 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEditor;
-using UnityEngine;
-
 namespace RailsChat
 {
     public class ChatChannel : AbstractChannel
@@ -16,9 +11,9 @@ namespace RailsChat
             return "Chat";
         }
 
-        public override void PacketReceived(Packet packet)
+        public override void OnPacketReceived(Packet packet)
         {
-            base.PacketReceived(packet);
+            base.OnPacketReceived(packet);
         }
     }
 }

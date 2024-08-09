@@ -27,7 +27,7 @@ namespace RailsChat
 
         private void Awake()
         {
-            _loginButtonClicked = SignalsService.GetStream(StreamId.UI.LoginButtonClicked);
+            _loginButtonClicked = SignalsService.GetStream(StreamId.UI.LoginButton);
         }
 
         public void OnLoginButtonClicked()
