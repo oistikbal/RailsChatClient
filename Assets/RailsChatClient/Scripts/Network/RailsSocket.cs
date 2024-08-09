@@ -11,7 +11,7 @@ namespace RailsChat
         private WebSocket _ws;
 
         private Dictionary<Type, AbstractChannel> _channels;
-        public Dictionary<string, Type> _channelsMap;
+        private Dictionary<string, Type> _channelsMap;
 
         public Dictionary<Type, AbstractChannel> Channels { get { return _channels; } }
 

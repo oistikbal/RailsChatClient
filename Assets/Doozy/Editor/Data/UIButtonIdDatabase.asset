@@ -18,3 +18,5 @@ MonoBehaviour:
       Name: None
     - Category: UI
       Name: Login
+    - Category: UI
+      Name: Send
