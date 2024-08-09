@@ -8,7 +8,7 @@ namespace RailsChat
 
         public override string ToString()
         {
-            return "Chat";
+            return "ChatChannel";
         }
 
         public override void OnPacketReceived(Packet packet)

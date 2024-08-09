@@ -85,17 +85,11 @@ namespace RailsChat
             if (token.IsNullOrEmpty())
                 return false;
 
-            _railsSocket = new RailsSocket(_webSocketUrl, token);
+            _railsSocket = new RailsSocket(_webSocketUrl, token, _channelTypes);
 
 
             if (!await _railsSocket.Connect())
                 return false;
-
-
-            foreach (var channelType in _channelTypes)
-            {
-                _railsSocket.SubscribeChannel(channelType);
-            }
 
             return true;
         }
@@ -113,6 +107,7 @@ namespace RailsChat
             {
                 responseString = await response.Content.ReadAsStringAsync();
                 responseObject = JsonUtility.FromJson<AuthenticationTokenPacket>(responseString);
+                Debug.Log(responseString);
             }
             catch
             {
@@ -120,13 +115,6 @@ namespace RailsChat
             }
 
             return responseObject.AuthenticationToken;
-        }
-
-        public T GetChannel<T>() where T : AbstractChannel
-        {
-            if (_railsSocket != null)
-                return _railsSocket.GetChannel<T>();
-            else return null;
         }
     }
 }
